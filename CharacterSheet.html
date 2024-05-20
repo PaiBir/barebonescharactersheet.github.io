@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<!-- Background: #192841. Elements: #ffebcd-->
+<html>
+    <head>
+        <title>Character Sheet</title>
+        <style>
+            h1 {
+                text-align: center;
+            }
+            .stat-wrapper {
+                text-align: center;
+            }
+            .centercollumn {
+                float: left;
+                width: 780px;
+            }
+            .stat {
+                float: left;
+                width: 210px;
+                margin: 20px;
+                border: 5px;
+                border-style: double;
+            }
+            .notes {
+                float: left;
+                width: 605px;
+                margin:20px;
+                border: 5px;
+                border-style: double;
+            }
+            .filler {
+                float: left;
+                width: 210px;
+                margin: 45px 20px;
+            }
+            .horizstat {
+                float:left;
+                margin-left: auto;
+                margin-right: auto;
+                margin: 20px;
+                border: 5px;
+                border-style: double;
+            }
+            .Checkboxes {
+                border: 2px;
+                width: 25%;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+                border-style: solid;
+            }
+            .HCheckboxes {
+                float:left;
+                border: 2px;
+                width: 52px;
+                margin-left: 8.5px;
+                margin-right: 8.5px;
+                text-align: center;
+                border-style: solid;
+            }
+            .mainstat {
+                width: 105px;
+                height: 105px;
+                text-align: center;
+                font-size: 100px;
+            }
+            .Name {
+                width: 630px;
+                height: 52.5px;
+                text-align: center;
+                font-size: 50px;
+            }
+            .ledgerentry {
+                width: 450px;
+            }
+            p {
+                text-align: left;
+            }
+        </style>
+    </head>
+    <body>
+        <div class = "stat-wrapper">
+            <button type="button" onclick="SaveChar();">Save Character</button>   <button type="button" onclick="LoadChar();">Load Character</button>   <input type="file" id="CharFile">
+        </div>
+        <h1>
+            <input type="text" class="Name" id="Name"> - <input type="text" class="Name" id="Nickname">
+        </h1>
+        <div class = "stat-wrapper">
+            <div class="stat">
+                <h2>
+                    Edge
+                </h2>
+                <input class = "mainstat" type="text" id="Edge">
+            </div>
+            <div class="stat">
+                <h2>
+                    Heart
+                </h2>
+                <input class = "mainstat" type="text" id="Heart">
+            </div>
+            <div class="stat">
+                <h2>
+                    Iron
+                </h2>
+                <input class = "mainstat" type="text" id="Iron">
+            </div>
+            <div class="stat">
+                <h2>
+                    Shadow
+                </h2>
+                <input class = "mainstat" type="text" id="Shadow">
+            </div>
+            <div class="stat">
+                <h2>
+                    Wits
+                </h2>
+                <input class = "mainstat" type="text" id="Wits">
+            </div>
+        </div>
+        <div class = "stat-wrapper">
+            <div class="stat">
+                <h2>
+                    Misfortunes
+                </h2>
+                <p>
+                    <input id="Wounded" class="effect" type="checkbox">
+                    <label for="Wounded">Wounded</label>
+                </p>
+                <p>
+                    <input id="Shaken" class="effect" type="checkbox">
+                    <label for="Shaken">Shaken</label>
+                </p>
+                <p>
+                    <input id="Unprepared" class="effect" type="checkbox">
+                    <label for="Unprepared">Unprepared</label>
+                </p>
+                <h2>
+                    Lasting Effects
+                </h2>
+                <p>
+                    <input id="Permenently Harmed" class="effect" type="checkbox">
+                    <label for="Permenently Harmed">Permenently Harmed</label>
+                </p>
+                <p>
+                    <input id="Traumatized" class="effect" type="checkbox">
+                    <label for="Traumatized">Traumatized</label>
+                </p>
+                <h2>
+                    Burdens
+                </h2>
+                <p>
+                    <input id="Doomed" class="effect" type="checkbox">
+                    <label for="Doomed">Doomed</label>
+                </p>
+                <p>
+                    <input id="Tormented" class="effect" type="checkbox">
+                    <label for="Tormented">Tormented</label>
+                </p>
+                <p>
+                    <input id="Indebted" class="effect" type="checkbox">
+                    <label for="Indebted">Indebted</label>
+                </p>
+
+                <h2>
+                    Vehicle
+                </h2>
+                <p>
+                    <input id="Battered" class="effect" type="checkbox">
+                    <label for="Battered">Battered</label>
+                </p>
+                <p>
+                    <input id="Cursed" class="effect" type="checkbox">
+                    <label for="Cursed">Cursed</label>
+                </p>
+                <h2>
+                    Other Impacts
+                </h2>
+                <p>
+                    <input id="Custom1" class="effect" type="checkbox">
+                    <label for="Custom1"><input id="Custom1Entry" type="text"></label>
+                </p>
+                <p>
+                    <input id="Custom2" class="effect" type="checkbox">
+                    <label for="Custom2"><input id="Custom2Entry" type="text"></label>
+                </p>
+                <p>
+                    <input id="Custom3" class="effect" type="checkbox">
+                    <label for="Custom3"><input id="Custom3Entry" type="text"></label>
+                </p>
+            </div>
+            <div class = "centercollumn">
+                <div class="stat">
+                    <h2>
+                        Health
+                    </h2>
+                    <p>
+                        <input type="radio" id="0" name="health" value="0">
+                        <label for="0">0</label><br>
+                        <input type="radio" id="1" name="health" value="1">
+                        <label for="1">1</label><br>
+                        <input type="radio" id="2" name="health" value="2">
+                        <label for="2">2</label><br>
+                        <input type="radio" id="3" name="health" value="3">
+                        <label for="3">3</label><br>
+                        <input type="radio" id="4" name="health" value="4">
+                        <label for="4">4</label><br>
+                        <input type="radio" id="5" name="health" value="5">
+                        <label for="5">5</label>
+                    </p>
+                </div>
+                <div class="stat">
+                    <h2>
+                        Spirit
+                    </h2>
+                    <p>
+                        <input type="radio" id="0" name="spirit" value="0">
+                        <label for="0">0</label><br>
+                        <input type="radio" id="1" name="spirit" value="1">
+                        <label for="1">1</label><br>
+                        <input type="radio" id="2" name="spirit" value="2">
+                        <label for="2">2</label><br>
+                        <input type="radio" id="3" name="spirit" value="3">
+                        <label for="3">3</label><br>
+                        <input type="radio" id="4" name="spirit" value="4">
+                        <label for="4">4</label><br>
+                        <input type="radio" id="5" name="spirit" value="5">
+                        <label for="5">5</label>
+                    </p>
+                </div>
+                <div class="stat">
+                    <h2>
+                        Supply
+                    </h2>
+                    <p>
+                        <input type="radio" id="0" name="supply" value="0">
+                        <label for="0">0</label><br>
+                        <input type="radio" id="1" name="supply" value="1">
+                        <label for="1">1</label><br>
+                        <input type="radio" id="2" name="supply" value="2">
+                        <label for="2">2</label><br>
+                        <input type="radio" id="3" name="supply" value="3">
+                        <label for="3">3</label><br>
+                        <input type="radio" id="4" name="supply" value="4">
+                        <label for="4">4</label><br>
+                        <input type="radio" id="5" name="supply" value="5">
+                        <label for="5">5</label>
+                    </p>
+                </div>
+                <div class="stat" id="Qsts">
+                    <h2>
+                        Quests
+                    </h2>
+                    <div class = "Checkboxes" id="B1">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "Checkboxes" id="B2">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "Checkboxes" id="B3">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "Checkboxes" id="B4">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "Checkboxes" id="B5">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "Checkboxes" id="B6">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "Checkboxes" id="B7">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "Checkboxes" id="B8">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "Checkboxes" id="B9">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "Checkboxes" id="B10">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                </div>
+                <div class="stat" id="Bond">
+                    <h2>
+                        Bonds
+                    </h2>
+                    <div class = "Checkboxes" id="B1">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "Checkboxes" id="B2">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "Checkboxes" id="B3">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "Checkboxes" id="B4">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "Checkboxes" id="B5">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "Checkboxes" id="B6">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "Checkboxes" id="B7">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "Checkboxes" id="B8">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "Checkboxes" id="B9">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "Checkboxes" id="B10">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                </div>
+                <div class="stat" id="Disc">
+                    <h2>
+                        Discoveries
+                    </h2>
+                    <div class = "Checkboxes" id="B1">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "Checkboxes" id="B2">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "Checkboxes" id="B3">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "Checkboxes" id="B4">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "Checkboxes" id="B5">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "Checkboxes" id="B6">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "Checkboxes" id="B7">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "Checkboxes" id="B8">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "Checkboxes" id="B9">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "Checkboxes" id="B10">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                </div>
+                <div class="horizstat" id="Bvow">
+                    <h2>
+                        Background Vow
+                    </h2><br>
+                    <div class = "HCheckboxes" id="B1">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "HCheckboxes" id="B2">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "HCheckboxes" id="B3">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "HCheckboxes" id="B4">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "HCheckboxes" id="B5">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "HCheckboxes" id="B6">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "HCheckboxes" id="B7">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "HCheckboxes" id="B8">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "HCheckboxes" id="B9">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                    <div class = "HCheckboxes" id="B10">
+                        <input type="checkbox" id = "1tick"><input type="checkbox" id = "2tick"><br>
+                        <input type="checkbox" id = "3tick"><input type="checkbox" id = "4tick"><br>
+                        <input type="checkbox" id = "Check1">  <input type="checkbox" id = "Check2">
+                    </div>
+                </div>
+            </div>
+            <div class="stat">
+                <h2>
+                    Momentum
+                </h2>
+                <p>
+                    <input type="radio" id="+10" name="momentum" value="+10">
+                    <label for="+10">+10</label><br><br>
+                    <input type="radio" id="+9" name="momentum" value="+9">
+                    <label for="+9">+9</label><br><br>
+                    <input type="radio" id="+8" name="momentum" value="+8">
+                    <label for="+8">+8</label><br><br>
+                    <input type="radio" id="+7" name="momentum" value="+7">
+                    <label for="+7">+7</label><br><br>
+                    <input type="radio" id="+6" name="momentum" value="+6">
+                    <label for="+6">+6</label><br><br>
+                    <input type="radio" id="+5" name="momentum" value="+5">
+                    <label for="+5">+5</label><br><br>
+                    <input type="radio" id="+4" name="momentum" value="+4">
+                    <label for="+4">+4</label><br><br>
+                    <input type="radio" id="+3" name="momentum" value="+3">
+                    <label for="+3">+3</label><br><br>
+                    <input type="radio" id="+2" name="momentum" value="+2">
+                    <label for="+2">+2</label><br><br>
+                    <input type="radio" id="+1" name="momentum" value="+1">
+                    <label for="+1">+1</label><br><br>
+                    <input type="radio" id="0" name="momentum" value="0">
+                    <label for="0">0</label><br><br>
+                    <input type="radio" id="-1" name="momentum" value="-1">
+                    <label for="-1">-1</label><br><br>
+                    <input type="radio" id="-2" name="momentum" value="-2">
+                    <label for="-2">-2</label><br><br>
+                    <input type="radio" id="-3" name="momentum" value="-3">
+                    <label for="-3">-3</label><br><br>
+                    <input type="radio" id="-4" name="momentum" value="-4">
+                    <label for="-4">-4</label><br><br>
+                    <input type="radio" id="-5" name="momentum" value="-5">
+                    <label for="-5">-5</label><br><br>
+                    <input type="radio" id="-6" name="momentum" value="-6">
+                    <label for="-6">-6</label>
+                </p>
+            </div>
+        </div>
+        <div class = "stat-wrapper">
+            <div class="stat">
+                <h2>
+                    Hold
+                </h2>
+                <p>
+                    <input type="radio" id="0" name="hold" value="0">
+                    <label for="0">0</label><br><br>
+                    <input type="radio" id="1" name="hold" value="1">
+                    <label for="1">1</label><br><br>
+                    <input type="radio" id="2" name="hold" value="2">
+                    <label for="2">2</label><br><br>
+                    <input type="radio" id="3" name="hold" value="3">
+                    <label for="3">3</label><br><br>
+                    <input type="radio" id="4" name="hold" value="4">
+                    <label for="4">4</label><br><br>
+                    <input type="radio" id="5" name="hold" value="5">
+                    <label for="5">5</label>
+                </p>
+            </div>
+        </div>
+        <div class = "filler"></div>
+        <div class = "stat-wrapper">
+            <div class="notes">
+                <h2>
+                    Ledger
+                </h2>
+                <div class="entry">
+                    <input class = "ledgerentry" type="text" id="ledger1"> | <input type="checkbox" id="L1-1"> <input type="checkbox" id="L1-2"> <input type="checkbox" id="L1-3"> <input type="checkbox" id="L1-4"> <input type="checkbox" id="L1-5">
+                </div>
+                <div class="entry">
+                    <input class = "ledgerentry" type="text" id="ledger2"> | <input type="checkbox" id="L2-1"> <input type="checkbox" id="L2-2"> <input type="checkbox" id="L2-3"> <input type="checkbox" id="L2-4"> <input type="checkbox" id="L2-5">
+                </div>
+                <div class="entry">
+                    <input class = "ledgerentry" type="text" id="ledger3"> | <input type="checkbox" id="L3-1"> <input type="checkbox" id="L3-2"> <input type="checkbox" id="L3-3"> <input type="checkbox" id="L3-4"> <input type="checkbox" id="L3-5">
+                </div>
+                <div class="entry">
+                    <input class = "ledgerentry" type="text" id="ledger4"> | <input type="checkbox" id="L4-1"> <input type="checkbox" id="L4-2"> <input type="checkbox" id="L4-3"> <input type="checkbox" id="L4-4"> <input type="checkbox" id="L4-5">
+                </div>
+                <div class="entry">
+                    <input class = "ledgerentry" type="text" id="ledger5"> | <input type="checkbox" id="L5-1"> <input type="checkbox" id="L5-2"> <input type="checkbox" id="L5-3"> <input type="checkbox" id="L5-4"> <input type="checkbox" id="L5-5">
+                </div>
+                <div class="entry">
+                    <input class = "ledgerentry" type="text" id="ledger6"> | <input type="checkbox" id="L6-1"> <input type="checkbox" id="L6-2"> <input type="checkbox" id="L6-3"> <input type="checkbox" id="L6-4"> <input type="checkbox" id="L6-5">
+                </div>
+                <div class="entry">
+                    <input class = "ledgerentry" type="text" id="ledger7"> | <input type="checkbox" id="L7-1"> <input type="checkbox" id="L7-2"> <input type="checkbox" id="L7-3"> <input type="checkbox" id="L7-4"> <input type="checkbox" id="L7-5">
+                </div>
+                <div class="entry">
+                    <input class = "ledgerentry" type="text" id="ledger8"> | <input type="checkbox" id="L8-1"> <input type="checkbox" id="L8-2"> <input type="checkbox" id="L8-3"> <input type="checkbox" id="L8-4"> <input type="checkbox" id="L8-5">
+                </div>
+                <div class="entry">
+                    <input class = "ledgerentry" type="text" id="ledger9"> | <input type="checkbox" id="L9-1"> <input type="checkbox" id="L9-2"> <input type="checkbox" id="L9-3"> <input type="checkbox" id="L9-4"> <input type="checkbox" id="L9-5">
+                </div>
+                <div class="entry">
+                    <input class = "ledgerentry" type="text" id="ledger10"> | <input type="checkbox" id="L10-1"> <input type="checkbox" id="L10-2"> <input type="checkbox" id="L10-3"> <input type="checkbox" id="L10-4"> <input type="checkbox" id="L10-5">
+                </div>
+                <div class="entry">
+                    <input class = "ledgerentry" type="text" id="ledger11"> | <input type="checkbox" id="L11-1"> <input type="checkbox" id="L11-2"> <input type="checkbox" id="L11-3"> <input type="checkbox" id="L11-4"> <input type="checkbox" id="L11-5">
+                </div>
+                <div class="entry">
+                    <input class = "ledgerentry" type="text" id="ledger12"> | <input type="checkbox" id="L12-1"> <input type="checkbox" id="L12-2"> <input type="checkbox" id="L12-3"> <input type="checkbox" id="L12-4"> <input type="checkbox" id="L12-5">
+                </div>
+                <div class="entry">
+                    <input class = "ledgerentry" type="text" id="ledger13"> | <input type="checkbox" id="L13-1"> <input type="checkbox" id="L13-2"> <input type="checkbox" id="L13-3"> <input type="checkbox" id="L13-4"> <input type="checkbox" id="L13-5">
+                </div>
+                <div class="entry">
+                    <input class = "ledgerentry" type="text" id="ledger14"> | <input type="checkbox" id="L14-1"> <input type="checkbox" id="L14-2"> <input type="checkbox" id="L14-3"> <input type="checkbox" id="L14-4"> <input type="checkbox" id="L14-5">
+                </div>
+                <div class="entry">
+                    <input class = "ledgerentry" type="text" id="ledger15"> | <input type="checkbox" id="L15-1"> <input type="checkbox" id="L15-2"> <input type="checkbox" id="L15-3"> <input type="checkbox" id="L15-4"> <input type="checkbox" id="L15-5">
+                </div>
+                <div class="entry">
+                    <input class = "ledgerentry" type="text" id="ledger16"> | <input type="checkbox" id="L16-1"> <input type="checkbox" id="L16-2"> <input type="checkbox" id="L16-3"> <input type="checkbox" id="L16-4"> <input type="checkbox" id="L16-5">
+                </div>
+                <div class="entry">
+                    <input class = "ledgerentry" type="text" id="ledger17"> | <input type="checkbox" id="L17-1"> <input type="checkbox" id="L17-2"> <input type="checkbox" id="L17-3"> <input type="checkbox" id="L17-4"> <input type="checkbox" id="L17-5">
+                </div>
+                <div class="entry">
+                    <input class = "ledgerentry" type="text" id="ledger18"> | <input type="checkbox" id="L18-1"> <input type="checkbox" id="L18-2"> <input type="checkbox" id="L18-3"> <input type="checkbox" id="L18-4"> <input type="checkbox" id="L18-5">
+                </div>
+                <div class="entry">
+                    <input class = "ledgerentry" type="text" id="ledger19"> | <input type="checkbox" id="L19-1"> <input type="checkbox" id="L19-2"> <input type="checkbox" id="L19-3"> <input type="checkbox" id="L19-4"> <input type="checkbox" id="L19-5">
+                </div>
+                <div class="entry">
+                    <input class = "ledgerentry" type="text" id="ledger20"> | <input type="checkbox" id="L20-1"> <input type="checkbox" id="L20-2"> <input type="checkbox" id="L20-3"> <input type="checkbox" id="L20-4"> <input type="checkbox" id="L20-5">
+                </div>
+            </div>
+            <div class="notes">
+                <h2>
+                    Notes
+                </h2>
+                <div style="text-align: left;">
+                    <textarea id="notes" style="text-align: left; width: 599px; height: 430px; resize: vertical;"></textarea>
+                </div>
+            </div>
+        </div>
+    <script src="CharacterSheet.js"></script>
+    </body>
+</html>
